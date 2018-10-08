@@ -1,0 +1,6 @@
+@import './breakpoints';
+
+$app-sizes: (
+  'normal': 100%,
+  'bigscreen': map-get($breakpoints, 'bigscreen'),
+);
