@@ -4,6 +4,24 @@
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { ActionKeys } from '@/store/ActionKeys';
+
+@Component({})
+export default class App extends Vue {
+
+  public constructor() {
+    super();
+  }
+
+  public async mounted(): Promise<void> {
+    await this.$store.dispatch(ActionKeys.FETCH_DATA);
+  }
+
+}
+</script>
+
 <style lang="scss">
 * {
   box-sizing: border-box;
