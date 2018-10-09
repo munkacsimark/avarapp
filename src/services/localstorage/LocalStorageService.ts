@@ -2,7 +2,7 @@ import { LocalStorageKeys } from '@/services/localstorage/LocalStorageKeys';
 
 export default class LocalStorageService {
 
-  public static getConsumption = () =>
+  public static getConsumption = (): Promise<number[]> =>
     new Promise<number[]>((resolve, reject) => {
       try {
         const consumption: string | null = localStorage.getItem(LocalStorageKeys.CONSUMPTION);
@@ -12,7 +12,7 @@ export default class LocalStorageService {
       }
     })
 
-  public static addDrink = (drinkId: number) =>
+  public static addDrink = (drinkId: number): Promise<void> =>
     new Promise<void>((resolve, reject) => {
       try {
         const currentConsumption: number[] = JSON.parse(localStorage.getItem(LocalStorageKeys.CONSUMPTION) || '[]');
@@ -24,7 +24,7 @@ export default class LocalStorageService {
       }
     })
 
-  public static removeDrink = (drinkId: number) =>
+  public static removeDrink = (drinkId: number): Promise<void> =>
     new Promise<void>((resolve, reject) => {
       try {
         const currentConsumption: number[] = JSON.parse(localStorage.getItem(LocalStorageKeys.CONSUMPTION) || '[]');
