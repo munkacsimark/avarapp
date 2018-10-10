@@ -3,8 +3,8 @@
     <view-header/>
       <ul v-if="summaryListExists">
         <li
-          v-for="item in summaryList"
-          :key="item.id"
+          v-for="(item, index) in summaryList"
+          :key="index"
           @click="removeConsumption(item.id)">
           {{ item.name }}, {{ item.price }}Ft, {{ item.size ? `${item.size}l` : '' }}</li>
       </ul>
@@ -46,7 +46,7 @@ export default class Summary extends Vue {
   }
 
   private async setSummaryList(): Promise<void> {
-    this.summaryList = Array.from(await DataBaseService.getItemsByIds(this.$store.state.app.consumption));
+    this.summaryList = await DataBaseService.getItemsByIds(this.$store.state.app.consumption);
   }
 
   private removeConsumption(id: number): void {

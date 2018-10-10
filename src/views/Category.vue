@@ -58,7 +58,7 @@ export default class Category extends Vue {
       case ItemCategories.FROCCS: category = ItemCategories.FROCCS; break;
       default: throw new ReferenceError('Unknown ItemCategory');
     }
-    this.itemList = Array.from(await DataBaseService.getItemsByCategories([category]));
+    this.itemList = await DataBaseService.getItemsByCategories([category]);
   }
 
   private addConsumption(id: number): void {

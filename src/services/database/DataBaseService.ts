@@ -12,20 +12,22 @@ import IItem from '@/services/database/interfaces/IItem';
 
 export default class DataBaseService {
 
-  public static getItemsByIds = (idList: number[]): Promise<Set<IItem>> =>
-    new Promise<Set<IItem>>((resolve, reject) => {
+  public static getItemsByIds = (idList: number[]): Promise<IItem[]> =>
+    new Promise<IItem[]>((resolve, reject) => {
       try {
-        const itemList: IItem[] = [...DataBaseService.mergeAll()].filter((item) =>
-          idList.some((id) => item.id === id),
-        );
-        resolve(new Set(itemList));
+        const dbItems: IItem[] = [...DataBaseService.mergeAll()];
+        const itemList: IItem[] = [];
+        idList.forEach((id: number) =>
+          itemList.push(dbItems.filter((dbItem: IItem) =>
+            dbItem.id === id)[0]));
+        resolve(itemList);
       } catch (error) {
         reject(error);
       }
     })
 
-  public static getItemsByCategories = (categoryList: ItemCategories[]): Promise<Set<IItem>> =>
-    new Promise<Set<IItem>>((resolve, reject) => {
+  public static getItemsByCategories = (categoryList: ItemCategories[]): Promise<IItem[]> =>
+    new Promise<IItem[]>((resolve, reject) => {
       try {
         const itemList: IItem[] = [];
         categoryList.forEach((category) => {
@@ -40,7 +42,7 @@ export default class DataBaseService {
             default: throw new ReferenceError('Unknown ItemCategories');
           }
         });
-        resolve(new Set(itemList));
+        resolve(itemList);
       } catch (error) {
         reject(error);
       }
