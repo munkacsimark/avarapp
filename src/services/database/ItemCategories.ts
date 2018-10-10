@@ -1,4 +1,4 @@
-export enum ItemCategory {
+export enum ItemCategories {
   COFFEE = 'Kávé',
   BEER = 'Sör',
   HOT_DRINK = 'Melegítő',

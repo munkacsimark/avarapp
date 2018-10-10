@@ -12,7 +12,7 @@ export default class LocalStorageService {
       }
     })
 
-  public static addDrink = (drinkId: number): Promise<void> =>
+  public static addConsumption = (drinkId: number): Promise<void> =>
     new Promise<void>((resolve, reject) => {
       try {
         const currentConsumption: number[] = JSON.parse(localStorage.getItem(LocalStorageKeys.CONSUMPTION) || '[]');
@@ -24,7 +24,7 @@ export default class LocalStorageService {
       }
     })
 
-  public static removeDrink = (drinkId: number): Promise<void> =>
+  public static removeConsumption = (drinkId: number): Promise<void> =>
     new Promise<void>((resolve, reject) => {
       try {
         const currentConsumption: number[] = JSON.parse(localStorage.getItem(LocalStorageKeys.CONSUMPTION) || '[]');

@@ -16,11 +16,19 @@ export const actions: ActionTree<IAppState, IRootState> = {
     }
   },
 
-  async addDrink({ commit }, drinkId: number): Promise<void> {
+  async addConsumption({ commit }, id: number): Promise<void> {
     try {
-      await LocalStorageService.addDrink(drinkId);
-      const consumption: number[] = await LocalStorageService.getConsumption();
-      commit(MutationKeys.APP_CHANGED, consumption);
+      await LocalStorageService.addConsumption(id);
+      commit(MutationKeys.APP_CHANGED, await LocalStorageService.getConsumption());
+    } catch (error) {
+      commit(MutationKeys.APP_ERROR);
+    }
+  },
+
+  async removeConsumption({ commit }, id: number): Promise<void> {
+    try {
+      await LocalStorageService.removeConsumption(id);
+      commit(MutationKeys.APP_CHANGED, await LocalStorageService.getConsumption());
     } catch (error) {
       commit(MutationKeys.APP_ERROR);
     }

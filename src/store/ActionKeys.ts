@@ -1,4 +1,5 @@
 export enum ActionKeys {
   FETCH_DATA = 'app/fetchData',
-  ADD_DRINK = 'app/addDrink',
+  ADD_CONSUMPTION = 'app/addConsumption',
+  REMOVE_CONSUMPTION = 'app/removeConsumption',
 }

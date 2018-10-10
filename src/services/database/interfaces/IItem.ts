@@ -1,8 +1,8 @@
-import { ItemCategory } from '@/services/database/ItemCategory';
+import { ItemCategories } from '@/services/database/ItemCategories';
 
 export default interface IItem {
   id: number;
-  category: ItemCategory;
+  category: ItemCategories;
   name: string;
   price: number;
   size?: number;
