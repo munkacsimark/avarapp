@@ -15,8 +15,8 @@ export default class App extends Vue {
     super();
   }
 
-  public async mounted(): Promise<void> {
-    await this.$store.dispatch(ActionKeys.FETCH_DATA);
+  public mounted(): void {
+    this.$store.dispatch(ActionKeys.FETCH_DATA);
   }
 
 }

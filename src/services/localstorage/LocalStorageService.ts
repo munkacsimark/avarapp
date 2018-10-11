@@ -2,40 +2,22 @@ import { LocalStorageKeys } from '@/services/localstorage/LocalStorageKeys';
 
 export default class LocalStorageService {
 
-  public static getConsumption = (): Promise<number[]> =>
-    new Promise<number[]>((resolve, reject) => {
-      try {
-        const consumption: string | null = localStorage.getItem(LocalStorageKeys.CONSUMPTION);
-        resolve(consumption ? JSON.parse(consumption) : []);
-      } catch (error) {
-        reject(error);
-      }
-    })
+  public static getConsumption = (): number[] => {
+    const consumption: string | null = localStorage.getItem(LocalStorageKeys.CONSUMPTION);
+    return consumption ? JSON.parse(consumption) : [];
+  }
 
-  public static addConsumption = (drinkId: number): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-      try {
-        const currentConsumption: number[] = JSON.parse(localStorage.getItem(LocalStorageKeys.CONSUMPTION) || '[]');
-        currentConsumption.push(drinkId);
-        localStorage.setItem(LocalStorageKeys.CONSUMPTION, JSON.stringify(currentConsumption));
-        resolve();
-      } catch (error) {
-        reject(error);
-      }
-    })
+  public static addConsumption = (drinkId: number): void => {
+    const currentConsumption: number[] = JSON.parse(localStorage.getItem(LocalStorageKeys.CONSUMPTION) || '[]');
+    currentConsumption.push(drinkId);
+    localStorage.setItem(LocalStorageKeys.CONSUMPTION, JSON.stringify(currentConsumption));
+  }
 
-  public static removeConsumption = (drinkId: number): Promise<void> =>
-    new Promise<void>((resolve, reject) => {
-      try {
-        const currentConsumption: number[] = JSON.parse(localStorage.getItem(LocalStorageKeys.CONSUMPTION) || '[]');
-        currentConsumption.splice(currentConsumption.indexOf(drinkId), 1);
-        localStorage.setItem(LocalStorageKeys.CONSUMPTION, JSON.stringify(currentConsumption));
-        resolve();
-      } catch (error) {
-        reject(error);
-      }
-    })
-
+  public static removeConsumption = (drinkId: number): void => {
+    const currentConsumption: number[] = JSON.parse(localStorage.getItem(LocalStorageKeys.CONSUMPTION) || '[]');
+    currentConsumption.splice(currentConsumption.indexOf(drinkId), 1);
+    localStorage.setItem(LocalStorageKeys.CONSUMPTION, JSON.stringify(currentConsumption));
+  }
 }
 
 

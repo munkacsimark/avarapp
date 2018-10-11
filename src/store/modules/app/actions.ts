@@ -7,31 +7,19 @@ import { MutationKeys } from './mutations';
 
 export const actions: ActionTree<IAppState, IRootState> = {
 
-  async fetchData({ commit }): Promise<void> {
-    try {
-      const consumption: number[] = await LocalStorageService.getConsumption();
-      commit(MutationKeys.APP_CHANGED, consumption);
-    } catch (error) {
-      commit(MutationKeys.APP_ERROR);
-    }
+  fetchData({ commit }): void {
+    const consumption: number[] = LocalStorageService.getConsumption();
+    commit(MutationKeys.APP_CHANGED, consumption);
   },
 
-  async addConsumption({ commit }, id: number): Promise<void> {
-    try {
-      await LocalStorageService.addConsumption(id);
-      commit(MutationKeys.APP_CHANGED, await LocalStorageService.getConsumption());
-    } catch (error) {
-      commit(MutationKeys.APP_ERROR);
-    }
+  addConsumption({ commit }, id: number): void {
+    LocalStorageService.addConsumption(id);
+    commit(MutationKeys.APP_CHANGED, LocalStorageService.getConsumption());
   },
 
-  async removeConsumption({ commit }, id: number): Promise<void> {
-    try {
-      await LocalStorageService.removeConsumption(id);
-      commit(MutationKeys.APP_CHANGED, await LocalStorageService.getConsumption());
-    } catch (error) {
-      commit(MutationKeys.APP_ERROR);
-    }
+  removeConsumption({ commit }, id: number): void {
+    LocalStorageService.removeConsumption(id);
+    commit(MutationKeys.APP_CHANGED, LocalStorageService.getConsumption());
   },
 
 };

@@ -46,7 +46,7 @@ export default class Category extends Vue {
     this.setItemList();
   }
 
-  private async setItemList(): Promise<void> {
+  private setItemList(): void {
     let category: ItemCategories;
     switch (this.$route.params.category) {
       case ItemCategories.COFFEE: category = ItemCategories.COFFEE; break;
@@ -58,7 +58,7 @@ export default class Category extends Vue {
       case ItemCategories.FROCCS: category = ItemCategories.FROCCS; break;
       default: throw new ReferenceError('Unknown ItemCategory');
     }
-    this.itemList = await DataBaseService.getItemsByCategories([category]);
+    this.itemList = DataBaseService.getItemsByCategories([category]);
   }
 
   private addConsumption(id: number): void {

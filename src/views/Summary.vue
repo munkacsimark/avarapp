@@ -45,8 +45,8 @@ export default class Summary extends Vue {
     this.setSummaryList();
   }
 
-  private async setSummaryList(): Promise<void> {
-    this.summaryList = await DataBaseService.getItemsByIds(this.$store.state.app.consumption);
+  private setSummaryList(): void {
+    this.summaryList = DataBaseService.getItemsByIds(this.$store.state.app.consumption);
   }
 
   private removeConsumption(id: number): void {
