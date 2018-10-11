@@ -18,6 +18,10 @@ export default class LocalStorageService {
     currentConsumption.splice(currentConsumption.indexOf(drinkId), 1);
     localStorage.setItem(LocalStorageKeys.CONSUMPTION, JSON.stringify(currentConsumption));
   }
+
+  public static clearConsumptions = (): void => {
+    localStorage.removeItem(LocalStorageKeys.CONSUMPTION);
+  }
 }
 
 
