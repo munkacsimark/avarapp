@@ -4,3 +4,6 @@ $app-sizes: (
   'normal': 100%,
   'bigscreen': map-get($breakpoints, 'bigscreen'),
 );
+
+$header-height: 36px;
+$footer-height: 50px;

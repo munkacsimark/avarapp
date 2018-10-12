@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <span>Fogyasztás: {{ currentPrice }}</span>
+  <header :class="$style.header">
+    <span>Fogyasztás: {{ currentPrice }} Ft</span>
   </header>
 </template>
 
@@ -25,3 +25,20 @@ export default class ViewHeader extends Vue {
 
 }
 </script>
+
+<style lang="scss" module>
+  @import '../../styles/colors';
+  @import '../../styles/sizes';
+
+  .header {
+    width: 100%;
+    height: $header-height;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: map-get($colors, 'blue-shadow');
+    font-weight: bold;
+    text-align: center;
+  }
+</style>

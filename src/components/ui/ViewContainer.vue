@@ -16,7 +16,10 @@ export default class ViewContainer extends Vue {}
 @import '../../styles/sizes';
 
 .container {
+  display: flex;
+  flex-direction: column;
   width: map-get($app-sizes, 'normal');
+  padding: $header-height 20px $footer-height 20px;
 
   @include respond-to('bigscreen') {
     width: map-get($app-sizes, 'bigscreen');

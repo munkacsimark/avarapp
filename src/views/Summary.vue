@@ -1,15 +1,28 @@
 <template>
   <view-container>
     <view-header/>
-      <ul v-if="summaryListExists">
+      <h1 :class="$style.title">Eddigi fogyasztás</h1>
+      <ul
+        :class="$style.list"
+        v-if="summaryListExists">
         <li
+          :class="$style.listItem"
           v-for="(item, index) in summaryList"
           :key="index"
-          @click="removeConsumption(item.id)">
-          {{ item.name }}, {{ item.price }}Ft, {{ item.size ? `${item.size}l` : '' }}</li>
+          @click="removeConsumption(item.id, $event)">
+          <span :class="$style.itemName">
+            {{ item.name }} {{ item.size ? `(${item.size}l)` : '' }}
+          </span>
+          <span>{{ item.price }}Ft</span>
+        </li>
       </ul>
-      <span v-else>Még nem vittél fel fogyasztást.</span>
-      <button @click="clearList">Lista törlése</button>
+      <span
+        v-else
+        :class="$style.emptySummary">Még nem ittál semmit. Gyerünk! :)</span>
+      <button
+        v-if="summaryListExists"
+        :class="$style.clearList"
+        @click="clearList">Lista törlése</button>
     <view-footer/>
   </view-container>
 </template>
@@ -37,8 +50,16 @@ export default class Summary extends Vue {
     super();
   }
 
-  private removeConsumption(id: number): void {
-    this.$store.dispatch(ActionKeys.REMOVE_CONSUMPTION, id);
+  private removeConsumption(id: number, event: Event): void {
+    if (event.currentTarget && event.currentTarget instanceof HTMLElement) {
+      const element = event.currentTarget;
+      element.classList.add('swipeOut');
+      const removeTimeout: number = setTimeout(() => {
+        this.$store.dispatch(ActionKeys.REMOVE_CONSUMPTION, id);
+        element.classList.remove('swipeOut');
+        clearTimeout(removeTimeout);
+      }, 200);
+    }
   }
 
   private clearList(): void {
@@ -56,3 +77,64 @@ export default class Summary extends Vue {
 
 }
 </script>
+
+<style lang="scss" module>
+@import '../styles/colors';
+@import '../styles/backgrounds';
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+.emptySummary {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.list {
+  padding: 0;
+  margin: 0;
+}
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+  margin: 20px 0;
+  opacity: 1;
+  
+  &::before {
+    content: '';
+    width: 34px;
+    height: 24px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    @include removeItemBackgroundImage;
+  }
+}
+.itemName {
+  flex-grow: 1;
+}
+.clearList {
+  display: flex;
+  align-self: center;
+  background-color: map-get($colors, 'red');
+  font-size: 1.6rem;
+  color: map-get($colors, 'white');
+  font-weight: bold;
+  border: 0;
+  border-radius: 2px;
+  padding: 10px 20px;
+}
+</style>
+
+<style>
+.swipeOut {
+  transform: translateX(200px);
+  opacity: 0;
+  transition: .2s;
+}
+</style>
