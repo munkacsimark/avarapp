@@ -13,9 +13,9 @@ export default class LocalStorageService {
     localStorage.setItem(LocalStorageKeys.CONSUMPTION, JSON.stringify(currentConsumption));
   }
 
-  public static removeConsumption = (drinkId: number): void => {
+  public static removeConsumption = (index: number): void => {
     const currentConsumption: number[] = JSON.parse(localStorage.getItem(LocalStorageKeys.CONSUMPTION) || '[]');
-    currentConsumption.splice(currentConsumption.indexOf(drinkId), 1);
+    currentConsumption.splice(index, 1);
     localStorage.setItem(LocalStorageKeys.CONSUMPTION, JSON.stringify(currentConsumption));
   }
 

@@ -9,7 +9,7 @@
           :class="$style.listItem"
           v-for="(item, index) in summaryList"
           :key="index"
-          @click="removeConsumption(item.id, $event)">
+          @click="removeConsumption(index, $event)">
           <span :class="$style.itemName">
             {{ item.name }} {{ item.size ? `(${item.size}l)` : '' }}
           </span>
@@ -50,12 +50,12 @@ export default class Summary extends Vue {
     super();
   }
 
-  private removeConsumption(id: number, event: Event): void {
+  private removeConsumption(index: number, event: Event): void {
     if (event.currentTarget && event.currentTarget instanceof HTMLElement) {
       const element = event.currentTarget;
       element.classList.add('swipeOut');
       const removeTimeout: number = setTimeout(() => {
-        this.$store.dispatch(ActionKeys.REMOVE_CONSUMPTION, id);
+        this.$store.dispatch(ActionKeys.REMOVE_CONSUMPTION, index);
         element.classList.remove('swipeOut');
         clearTimeout(removeTimeout);
       }, 200);

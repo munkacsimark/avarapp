@@ -17,8 +17,8 @@ export const actions: ActionTree<IAppState, IRootState> = {
     commit(MutationKeys.APP_CHANGED, LocalStorageService.getConsumption());
   },
 
-  removeConsumption({ commit }, id: number): void {
-    LocalStorageService.removeConsumption(id);
+  removeConsumption({ commit }, index: number): void {
+    LocalStorageService.removeConsumption(index);
     commit(MutationKeys.APP_CHANGED, LocalStorageService.getConsumption());
   },
 
