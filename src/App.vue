@@ -14,8 +14,8 @@ import LoadedFader from '@/components/ui/LoadedFader.vue';
 
 @Component({
   components: {
-    LoadedFader
-  }
+    LoadedFader,
+  },
 })
 export default class App extends Vue {
 
@@ -28,7 +28,7 @@ export default class App extends Vue {
 
   public mounted(): void {
     this.$store.dispatch(ActionKeys.FETCH_DATA);
- 
+
     const loadedTimeout: number = setTimeout(() => {
       this.isLoaded = true;
       clearTimeout(loadedTimeout);

@@ -7,8 +7,8 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   props: {
-    isLoaded: Boolean
-  }
+    isLoaded: Boolean,
+  },
 })
 export default class LoadedFader extends Vue {
 
